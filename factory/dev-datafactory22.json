@@ -1,0 +1,9 @@
+{
+	"name": "dev-datafactory22",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "85c17eba-8de8-483f-8acb-cf4f03ca5bd2",
+		"tenantId": "0711f2f0-b242-43ed-8fbd-63a63425583e"
+	}
+}
