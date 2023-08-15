@@ -185,7 +185,8 @@
 					"sink": {
 						"type": "SqlServerSink",
 						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": false
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate"
 					},
 					"enableStaging": false,
 					"translator": {
@@ -223,7 +224,7 @@
 			},
 			"latest_modified_date": {
 				"type": "String",
-				"defaultValue": "2010-08-01 T04:00:00.000Z"
+				"defaultValue": "2010-08-01T04:00:00.000Z"
 			}
 		},
 		"annotations": []
