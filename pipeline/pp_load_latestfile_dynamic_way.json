@@ -65,9 +65,17 @@
 							"typeProperties": {
 								"dataset": {
 									"referenceName": "ds_dynamic_file_name",
-									"type": "DatasetReference"
+									"type": "DatasetReference",
+									"parameters": {
+										"file_name": {
+											"value": "@item().name",
+											"type": "Expression"
+										}
+									}
 								},
-								"fieldList": [],
+								"fieldList": [
+									"lastModified"
+								],
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"enablePartitionDiscovery": false
