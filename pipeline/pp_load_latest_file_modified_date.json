@@ -20,6 +20,14 @@
 						"storeSettings": {
 							"type": "AzureBlobStorageReadSettings",
 							"recursive": true,
+							"modifiedDatetimeStart": {
+								"value": "@formatDateTime(utcnow(),'yyyy-MM-ddT00:00:00.000Z')",
+								"type": "Expression"
+							},
+							"modifiedDatetimeEnd": {
+								"value": "@formatDateTime(utcnow(),'yyyy-MM-ddT23:59:59.000Z')",
+								"type": "Expression"
+							},
 							"wildcardFileName": "emp*.csv",
 							"enablePartitionDiscovery": false
 						},
