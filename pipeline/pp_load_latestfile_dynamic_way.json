@@ -184,7 +184,6 @@
 					},
 					"sink": {
 						"type": "SqlServerSink",
-						"preCopyScript": "truncate table emp1",
 						"writeBehavior": "insert",
 						"sqlWriterUseTableLock": false
 					},
