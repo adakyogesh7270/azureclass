@@ -100,7 +100,7 @@
 							"userProperties": [],
 							"typeProperties": {
 								"expression": {
-									"value": "@greater(activity('Get Metadata child items').output.lastModified,variables('latest_modified_date'))",
+									"value": "@greater(activity('Get Metadata modifed date').output.lastModified,variables('latest_modified_date'))",
 									"type": "Expression"
 								},
 								"ifTrueActivities": [
@@ -116,7 +116,7 @@
 										"typeProperties": {
 											"variableName": "latest_file_name",
 											"value": {
-												"value": "@activity('Get Metadata child items').output.itemName",
+												"value": "@activity('Get Metadata modifed date').output.itemName",
 												"type": "Expression"
 											}
 										}
@@ -140,7 +140,7 @@
 										"typeProperties": {
 											"variableName": "latest_modified_date",
 											"value": {
-												"value": "@activity('Get Metadata child items').output.lastModified",
+												"value": "@activity('Get Metadata modifed date').output.lastModified",
 												"type": "Expression"
 											}
 										}
