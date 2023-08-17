@@ -9,7 +9,7 @@
 						"referenceName": "ds_dynamic_file_name",
 						"type": "DatasetReference"
 					},
-					"name": "sourceemp6csv"
+					"name": "sourceemp1csv"
 				}
 			],
 			"sinks": [
@@ -34,8 +34,8 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     ignoreNoFilesFound: false) ~> sourceemp6csv",
-				"sourceemp6csv derive(isActive_1 = 1) ~> derivedColumnisactive1",
+				"     ignoreNoFilesFound: false) ~> sourceemp1csv",
+				"sourceemp1csv derive(isActive_1 = 1) ~> derivedColumnisactive1",
 				"derivedColumnisactive1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
