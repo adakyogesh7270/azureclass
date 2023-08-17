@@ -1,0 +1,56 @@
+{
+	"name": "df_scd2",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_dynamic_file_name",
+						"type": "DatasetReference"
+					},
+					"name": "sourceemp1csv"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_dynamicsql",
+						"type": "DatasetReference"
+					},
+					"name": "sinkemptableinsert"
+				}
+			],
+			"transformations": [
+				{
+					"name": "derivedColumnisactive1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          id as string,",
+				"          name as string,",
+				"          city as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> sourceemp1csv",
+				"sourceemp1csv derive(isActive_1 = 1) ~> derivedColumnisactive1",
+				"derivedColumnisactive1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id as string,",
+				"          name as string,",
+				"          city as string",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sinkemptableinsert"
+			]
+		}
+	}
+}
