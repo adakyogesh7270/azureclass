@@ -10,6 +10,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "sourceemp1csv"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_dynamicsql",
+						"type": "DatasetReference"
+					},
+					"name": "sourceemptable"
 				}
 			],
 			"sinks": [
@@ -19,11 +26,24 @@
 						"type": "DatasetReference"
 					},
 					"name": "sinkemptableinsert"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_dynamicsql",
+						"type": "DatasetReference"
+					},
+					"name": "sinkupdate"
 				}
 			],
 			"transformations": [
 				{
 					"name": "derivedColumnisactive1"
+				},
+				{
+					"name": "lookup1"
+				},
+				{
+					"name": "derivedColumnisActive0"
 				}
 			],
 			"scriptLines": [
@@ -35,14 +55,32 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     ignoreNoFilesFound: false) ~> sourceemp1csv",
+				"source(output(",
+				"          id as string,",
+				"          name as string,",
+				"          city as string,",
+				"          isActive_1 as integer,",
+				"          modified_date as timestamp",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> sourceemptable",
 				"sourceemp1csv derive(isActive_1 = 1,",
-				"          modified_date = currentUTC()) ~> derivedColumnisactive1",
+				"          modified_date_0 = currentUTC()) ~> derivedColumnisactive1",
+				"sourceemp1csv, sourceemptable lookup(sourceemp1csv@id == sourceemptable@id,",
+				"     multiple: false,",
+				"     pickup: 'any',",
+				"     broadcast: 'auto')~> lookup1",
+				"lookup1 derive(isActive_0 = 0) ~> derivedColumnisActive0",
 				"derivedColumnisactive1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          id as string,",
 				"          name as string,",
-				"          city as string",
+				"          city as string,",
+				"          isActive_1 as integer,",
+				"          modified_date as timestamp",
 				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
@@ -51,7 +89,33 @@
 				"     recreate:true,",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sinkemptableinsert"
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 2) ~> sinkemptableinsert",
+				"derivedColumnisActive0 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          id as string,",
+				"          name as string,",
+				"          city as string,",
+				"          isActive_1 as integer,",
+				"          modified_date as timestamp",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:false,",
+				"     updateable:true,",
+				"     upsertable:false,",
+				"     keys:['id'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     saveOrder: 1,",
+				"     mapColumn(",
+				"          id = sourceemptable@id,",
+				"          name = sourceemptable@name,",
+				"          city = sourceemptable@city,",
+				"          isActive_1 = isActive_0,",
+				"          modified_date",
+				"     )) ~> sinkupdate"
 			]
 		}
 	}
