@@ -1,0 +1,125 @@
+{
+	"name": "pp_loadJson",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy data1",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "SqlServerSink",
+						"writeBehavior": "insert",
+						"sqlWriterUseTableLock": false,
+						"tableOption": "autoCreate"
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['id']"
+								},
+								"sink": {
+									"name": "id",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['name']"
+								},
+								"sink": {
+									"name": "name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['age']"
+								},
+								"sink": {
+									"name": "age",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['email']"
+								},
+								"sink": {
+									"name": "email",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Cars'][0]['make']"
+								},
+								"sink": {
+									"name": "make",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Cars'][0]['year']"
+								},
+								"sink": {
+									"name": "year",
+									"type": "Double"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Cars'][0]['color']"
+								},
+								"sink": {
+									"name": "color",
+									"type": "String"
+								}
+							}
+						],
+						"collectionReference": "$['Cars']"
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "ds_Json",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "ds_dynamicsql",
+						"type": "DatasetReference",
+						"parameters": {
+							"tablename": "jsontable"
+						}
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}
