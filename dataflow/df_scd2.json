@@ -44,6 +44,9 @@
 				},
 				{
 					"name": "derivedColumnisActive0"
+				},
+				{
+					"name": "alterRow1"
 				}
 			],
 			"scriptLines": [
@@ -73,6 +76,7 @@
 				"     pickup: 'any',",
 				"     broadcast: 'auto')~> lookup1",
 				"lookup1 derive(isActive_0 = 0) ~> derivedColumnisActive0",
+				"derivedColumnisActive0 alterRow(updateIf(1==1)) ~> alterRow1",
 				"derivedColumnisactive1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
@@ -91,7 +95,7 @@
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
 				"     saveOrder: 2) ~> sinkemptableinsert",
-				"derivedColumnisActive0 sink(allowSchemaDrift: true,",
+				"alterRow1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          id as string,",
