@@ -1,0 +1,19 @@
+{
+	"name": "ds_Json",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "devfiles_blob_storage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "jsonexample.json",
+				"container": "devfiles"
+			}
+		},
+		"schema": {}
+	}
+}
