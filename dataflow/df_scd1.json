@@ -1,0 +1,47 @@
+{
+	"name": "df_scd1",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_dynamic_file_name",
+						"type": "DatasetReference"
+					},
+					"name": "sourceemp6csv"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_dynamicsql",
+						"type": "DatasetReference"
+					},
+					"name": "sinkemptable"
+				}
+			],
+			"transformations": [
+				{
+					"name": "alterRowforupsert"
+				}
+			],
+			"scriptLines": [
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> sourceemp6csv",
+				"sourceemp6csv alterRow(upsertIf(1==1)) ~> alterRowforupsert",
+				"alterRowforupsert sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:false,",
+				"     updateable:false,",
+				"     upsertable:true,",
+				"     keys:['id'],",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sinkemptable"
+			]
+		}
+	}
+}

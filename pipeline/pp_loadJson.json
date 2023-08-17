@@ -28,9 +28,9 @@
 					},
 					"sink": {
 						"type": "SqlServerSink",
+						"preCopyScript": "truncate table jsontable",
 						"writeBehavior": "insert",
-						"sqlWriterUseTableLock": false,
-						"tableOption": "autoCreate"
+						"sqlWriterUseTableLock": false
 					},
 					"enableStaging": false,
 					"translator": {
@@ -74,7 +74,7 @@
 							},
 							{
 								"source": {
-									"path": "$['Cars'][0]['make']"
+									"path": "['make']"
 								},
 								"sink": {
 									"name": "make",
@@ -83,7 +83,7 @@
 							},
 							{
 								"source": {
-									"path": "$['Cars'][0]['year']"
+									"path": "['year']"
 								},
 								"sink": {
 									"name": "year",
@@ -92,7 +92,7 @@
 							},
 							{
 								"source": {
-									"path": "$['Cars'][0]['color']"
+									"path": "['color']"
 								},
 								"sink": {
 									"name": "color",
