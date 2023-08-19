@@ -1,0 +1,19 @@
+{
+	"name": "ds_FinalJson",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "devfiles_blob_storage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "ApiJsonOutput.json",
+				"container": "devfiles"
+			}
+		},
+		"schema": {}
+	}
+}

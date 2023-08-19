@@ -1,0 +1,16 @@
+{
+	"name": "ds_JsonApi",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lnk_SQL",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "JsonApi"
+		}
+	}
+}
