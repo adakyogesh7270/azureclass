@@ -1,0 +1,9 @@
+{
+	"name": "sandbox-datafactory22",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "e8e957fc-46f0-403a-9fcd-8ae90a798d1a",
+		"tenantId": "0711f2f0-b242-43ed-8fbd-63a63425583e"
+	}
+}
