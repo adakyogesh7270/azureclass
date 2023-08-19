@@ -1,0 +1,12 @@
+{
+	"name": "ds_restapi",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "lnk_restapi",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "RestResource",
+		"schema": []
+	}
+}
