@@ -1,0 +1,23 @@
+{
+	"name": "ds_ApiJsonOutput",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "devfiles_blob_storage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "ApiJsonOutput.json",
+				"container": "devfiles"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": false,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}
